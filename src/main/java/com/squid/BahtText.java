@@ -1,7 +1,6 @@
 package com.squid;
 
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +55,22 @@ public class BahtText {
                     }else if(!secondChar.equals("0")) {
                         integerText += numberTextMap.get(secondChar);
                     }
+                }
+            } else if(integerStr.length()==3){
+                String firstChar = String.valueOf(integerStr.charAt(0));
+                integerText = numberTextMap.get(firstChar);
+                integerText += "ร้อย";
+
+                String secondChar = String.valueOf(integerStr.charAt(1));
+                String thirdChar = String.valueOf(integerStr.charAt(2));
+                if(secondChar.equals("0")){
+                    if(thirdChar.equals("1")){
+                        integerText += "เอ็ด";
+                    }else if(!thirdChar.equals("0")) {
+                        integerText += numberTextMap.get(thirdChar);
+                    }
+                }else{
+                    // translate 10
                 }
             }
         }
