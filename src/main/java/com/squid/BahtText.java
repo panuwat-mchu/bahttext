@@ -10,7 +10,7 @@ public class BahtText {
 
     static {
         numberTextMap = new HashMap();
-        numberTextMap.put("0","ศูนย์");
+        numberTextMap.put("0","");
         numberTextMap.put("1","หนึ่ง");
         numberTextMap.put("2","สอง");
         numberTextMap.put("3","สาม");
@@ -20,11 +20,50 @@ public class BahtText {
         numberTextMap.put("7","เจ็ด");
         numberTextMap.put("8","แปด");
         numberTextMap.put("9","เก้า");
-        numberTextMap.put("10","สิบ");
-        numberTextMap.put("11","สิบเอ็ด");
-        numberTextMap.put("20","ยี่สิบ");
+//        numberTextMap.put("10","สิบ");
+//        numberTextMap.put("11","สิบเอ็ด");
+//        numberTextMap.put("20","ยี่สิบ");
     }
 
+    public static String parseText(double number) {
+
+
+        if(number == 0d) return "ศูนย์";
+
+
+        String numberStr = String.valueOf(number).split("\\.")[0];
+
+
+        String bahtText = "";
+
+
+        for(int i=0; i<numberStr.length();i++){
+            String digitStr = String.valueOf(numberStr.toCharArray()[i]);
+            int base = (numberStr.length()-1)-i;
+            System.out.println("base:"+base);
+            if(base==1){
+                if(digitStr.equals("1")) {
+                    bahtText += "สิบ";
+                }else if(digitStr.equals("2")){
+                    bahtText += "ยี่สิบ";
+                }else{
+                    bahtText += numberTextMap.get(digitStr)+"สิบ";
+                }
+            }else {
+                int leftBase = base+1;
+                if(leftBase == 1 && digitStr.equals("1")){
+                    bahtText += "เอ็ด";
+                }else {
+                    bahtText += numberTextMap.get(digitStr);
+                }
+            }
+        }
+
+
+        return bahtText;
+    }
+
+    /*
     public static String parseText(double number) {
         String numberStr = String.valueOf(number);
 
@@ -77,4 +116,5 @@ public class BahtText {
 
         return integerText;
     }
+    */
 }
